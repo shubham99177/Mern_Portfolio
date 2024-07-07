@@ -1,11 +1,16 @@
 {
   "name": "chai-or-code",
   "version": "1.0.0",
-  "description": "youtube app by chai or code",
+  "description": "backend folder structure",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "author": "shubham rathore",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.2"
+  }
 }
