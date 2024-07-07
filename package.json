@@ -1,0 +1,11 @@
+{
+  "name": "chai-or-code",
+  "version": "1.0.0",
+  "description": "youtube app by chai or code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shubham rathore",
+  "license": "ISC"
+}
