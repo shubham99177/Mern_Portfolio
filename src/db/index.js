@@ -1,5 +1,6 @@
+// this is mongoose export
 import mongoose from "mongoose";
-
+// this is constanct 
 import { DB_NAME } from "../constant.js";
 
 const connectDB = async () => {
