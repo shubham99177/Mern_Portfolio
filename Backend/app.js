@@ -6,6 +6,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import DBconnection from "./Database/DBconnection.js";
+import { ErrorMiddleware } from "./Middlewares/error.js";
+import messagerouter from "./Routes/message.route.js";
 
 const app = express();
 app.use(
@@ -28,5 +30,12 @@ app.use(
   })
 );
 
+app.use("/api/v1/message", messagerouter);
+
+app.get("/", (req, res) => {
+  res.send("hello world");
+})
 DBconnection();
+
+app.use(ErrorMiddleware)
 export default app;
