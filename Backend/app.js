@@ -8,6 +8,11 @@ import fileUpload from "express-fileupload";
 import DBconnection from "./Database/DBconnection.js";
 import { ErrorMiddleware } from "./Middlewares/error.js";
 import messagerouter from "./Routes/message.route.js";
+import userrouter from "./Routes/user.route.js";
+import timelinerouter from "./Routes/timeline.route.js";
+import softwareuseroute from "./Routes/softwareUse.route.js";
+import skillroute from "./Routes/skills.route.js";
+import projectrouter from "./Routes/project.route.js";
 
 const app = express();
 app.use(
@@ -31,11 +36,16 @@ app.use(
 );
 
 app.use("/api/v1/message", messagerouter);
+app.use("/api/v1/user", userrouter);
+app.use("/api/v1/timeline", timelinerouter);
+app.use("/api/v1/software", softwareuseroute);
+app.use("/api/v1/skills", skillroute);
+app.use("/api/v1/project", projectrouter);
 
 app.get("/", (req, res) => {
   res.send("hello world");
-})
+});
 DBconnection();
 
-app.use(ErrorMiddleware)
+app.use(ErrorMiddleware);
 export default app;
