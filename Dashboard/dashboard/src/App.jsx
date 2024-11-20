@@ -8,7 +8,7 @@ import {
 import Homepage from "./pages/Homepage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Login } from "./pages/Login";
+import Login from "./pages/Login";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ManageSkills from "./pages/ManageSkills";
@@ -17,8 +17,17 @@ import ManageProjects from "./pages/ManageProjects";
 import Viewproject from "./pages/Viewproject";
 import UpdatePassword from "./pages/UpdatePojects";
 import UpdatePojects from "./pages/UpdatePojects";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getuser } from "./Redux/Slices/UserSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getuser());
+  }, [dispatch]);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>

@@ -1,46 +1,46 @@
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Clearallerror,
-  clearalluserError,
-  login,
-} from "@/Redux/Slices/UserSlice";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  clearallusererror,
+  login,
+  logoutuser,
+} from "../Redux/Slices/UserSlice";
 import { toast } from "react-toastify";
+import { LogOut } from "lucide-react";
 
-export const description =
-  "A login page with two columns. The first column has the login form with email and password. There's a Forgot your passwork link and a link to sign up if you do not have an account. The second column has a cover image.";
-
-export function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, isAuthenticated, error, message } = useSelector(
+  const { loading, isAuthenticated, error } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const navigateTo = useNavigate();
+
+  const handleLogin = () => {
     dispatch(login(email, password));
-    console.log(email, password);
+
+    setEmail("");
+    setPassword("");
   };
 
   useEffect(() => {
     if (error) {
       toast.error(error);
-      dispatch(clearalluserError());
+      dispatch(clearallusererror());
     }
     if (isAuthenticated) {
-      navigate("/");
+      navigateTo("/");
     }
-  }, [isAuthenticated, error, dispatch, navigate]);
+  }, [dispatch, isAuthenticated, error, loading]);
 
   return (
-    <div className="w-full lg:grid lg:min-h-[100vh] my-auto py-12 px-8 lg:grid-cols-2 xl:min-h-[100vh]">
-      <div className="flex items-center justify-center ">
+    <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
+      <div className=" min-h-[100vh] flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
@@ -62,37 +62,36 @@ export function Login() {
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
+                <Label>Password</Label>
                 <Link
-                  to={"/password/forget"}
+                  to="/password/forget"
                   className="ml-auto inline-block text-sm underline"
                 >
                   Forgot your password?
                 </Link>
               </div>
               <Input
-                id="password"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                required
               />
             </div>
-            <Button type="submit" onClick={handleSubmit} className="w-full">
-              Login
+
+            <Button
+              onClick={() => handleLogin(email, password)}
+              className="w-full"
+              disabled={loading}
+            >
+              {loading ? "Submitting...." : "Login"}
             </Button>
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block">
-        {/* <Image
-          src="/placeholder.svg"
-          alt="Image"
-          width="1920"
-          height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        /> */}
+      <div className="flex justify-center items-center bg-muted">
+        <img src="/login.png" alt="login" />
       </div>
     </div>
   );
-}
+};
+
+export default Login;
