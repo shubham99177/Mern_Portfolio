@@ -91,8 +91,9 @@ export const getAllProjects = () => async (dispatch) => {
       "http://localhost:8000/api/v1/project/getall",
       { withCredentials: true }
     );
+    console.log(response.data.allprojects);
     dispatch(
-      projectSlice.actions.getAllProjectsSuccess(response.data.projects)
+      projectSlice.actions.getAllProjectsSuccess(response.data.allprojects)
     );
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {
@@ -149,6 +150,7 @@ export const updateProject = (id, newData) => async (dispatch) => {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
+    console.log(response);
     dispatch(projectSlice.actions.updateProjectSuccess(response.data.message));
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {

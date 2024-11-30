@@ -16,9 +16,10 @@ const messageSlice = createSlice({
       state.loading = true;
     },
     getAllMessagesSuccess(state, action) {
-      state.messages = action.payload;
+      state.messages = action.payload.data;
       state.error = null;
       state.loading = false;
+      console.log(state.payload);
     },
     getAllMessagesFailed(state, action) {
       state.messages = state.messages;
@@ -57,12 +58,11 @@ export const getAllMessages = () => async (dispatch) => {
   dispatch(messageSlice.actions.getAllMessagesRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/message/getall",
+      "http://localhost:8000/api/v1/message/getall",
       { withCredentials: true }
     );
-    dispatch(
-      messageSlice.actions.getAllMessagesSuccess(response.data.messages)
-    );
+    console.log(response.data.data);
+    dispatch(messageSlice.actions.getAllMessagesSuccess(response.data));
     dispatch(messageSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
@@ -75,7 +75,7 @@ export const deleteMessage = (id) => async (dispatch) => {
   dispatch(messageSlice.actions.deleteMessageRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/message/delete/${id}`,
+      `http://localhost:8000/api/v1/message/delete/${id}`,
       {
         withCredentials: true,
       }

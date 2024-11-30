@@ -62,7 +62,7 @@ const skillSlice = createSlice({
     },
     updateSkillSuccess(state, action) {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
       state.error = null;
     },
     updateSkillFailed(state, action) {
@@ -123,14 +123,16 @@ export const updateSkill = (id, proficiency) => async (dispatch) => {
   dispatch(skillSlice.actions.updateSkillRequest());
   try {
     const response = await axios.put(
-      `http://localhost:8000/api/v1/skill/update/${id}`,
+      `http://localhost:8000/api/v1/skills/update/${id}`,
       { proficiency },
       {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       }
     );
-    dispatch(skillSlice.actions.updateSkillSuccess(response.data.message));
+    console.log(response);
+
+    dispatch(skillSlice.actions.updateSkillSuccess(response.data));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(skillSlice.actions.updateSkillFailed(error.response.data.message));
@@ -141,7 +143,7 @@ export const deleteSkill = (id) => async (dispatch) => {
   dispatch(skillSlice.actions.deleteSkillRequest());
   try {
     const response = await axios.delete(
-      `http://localhost:8000/api/v1/skill/delete/${id}`,
+      `http://localhost:8000/api/v1/skills/delete/${id}`,
       {
         withCredentials: true,
       }

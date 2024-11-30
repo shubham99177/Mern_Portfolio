@@ -11,7 +11,7 @@ const timelineschema = new Schema(
       type: String,
       required: [true, "Description is required"],
     },
-    timelime: {
+    timeline: {
       from: {
         type: String,
         required: [true, "From is required"],
