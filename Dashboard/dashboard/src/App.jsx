@@ -15,11 +15,12 @@ import ManageSkills from "./pages/ManageSkills";
 import Managetimeline from "./pages/Managetimeline";
 import ManageProjects from "./pages/ManageProjects";
 import Viewproject from "./pages/Viewproject";
-import UpdatePassword from "./pages/UpdatePojects";
-import UpdatePojects from "./pages/UpdatePojects";
+import UpdatePassword from "./pages/UpdateProject";
+import UpdateProjects from "./pages/UpdateProject";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getuser } from "./Redux/Slices/UserSlice";
+import ViewProject from "./pages/Viewproject";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +40,8 @@ function App() {
         <Route path="/manage/timeline" element={<Managetimeline />} />
         <Route path="/manage/projects" element={<ManageProjects />} />
         <Route path="/view/project/:id" element={<Viewproject />} />
-        <Route path="/update/project/:id" element={<UpdatePojects />} />
+        <Route path="/update/project/:id" element={<UpdateProjects />} />
+        <Route path="/view/project/:id" element={<ViewProject />} />
       </Route>
     )
   );

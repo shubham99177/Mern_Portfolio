@@ -4,8 +4,6 @@ import { Project } from "../Models/project.model.js";
 import { v2 as cloudinary } from "cloudinary";
 
 export const addnewproject = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.ip || req.connection.remoteAddress);
-
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Project Banner is Required", 400));
   }
@@ -34,18 +32,26 @@ export const addnewproject = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("All Fields are Required", 400));
   }
 
-  const cloudinaryreponseforbanner = await cloudinary.uploader.upload(
+  if (!projectbanner.tempFilePath) {
+    return next(new ErrorHandler("Temporary file path is not available", 500));
+  }
+
+  const cloudinaryResponseForBanner = await cloudinary.uploader.upload(
     projectbanner.tempFilePath,
     {
       folder: "projectbanner",
     }
   );
-  if (!cloudinaryreponseforbanner || cloudinaryreponseforbanner.error) {
+
+  if (!cloudinaryResponseForBanner || cloudinaryResponseForBanner.error) {
     console.error(
       "Cloudinary error",
-      cloudinaryreponseforbanner.error || "unknown Cloudinary error"
+      cloudinaryResponseForBanner.error || "Unknown Cloudinary error"
     );
+  } else {
+    console.log("Upload successful:", cloudinaryResponseForBanner);
   }
+
   const project = await Project.create({
     title,
     description,
@@ -55,8 +61,8 @@ export const addnewproject = catchAsyncErrors(async (req, res, next) => {
     stack,
     deployed,
     projectbanner: {
-      public_id: cloudinaryreponseforbanner.public_id,
-      url: cloudinaryreponseforbanner.secure_url,
+      public_id: cloudinaryResponseForBanner.public_id,
+      url: cloudinaryResponseForBanner.secure_url,
     },
   });
   res.status(201).json({
@@ -92,6 +98,9 @@ export const updateproject = catchAsyncErrors(async (req, res, next) => {
   }
 
   const { projectbanner } = req.files;
+  console.log(req.files);
+  console.log(req.body);
+
   const cloudinaryreponseforbanner = await cloudinary.uploader.upload(
     projectbanner.tempFilePath,
     {
@@ -118,6 +127,7 @@ export const updateproject = catchAsyncErrors(async (req, res, next) => {
   await project.save();
   res.status(200).json({
     success: true,
+    message: "Project updated successfully",
     project,
   });
 });

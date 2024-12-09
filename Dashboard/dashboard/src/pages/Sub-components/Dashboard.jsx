@@ -18,7 +18,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { clearAllSkillErrors } from "../../Redux/Slices/skillSlice";
+import {
+  clearAllSkillErrors,
+  getAllSkills,
+} from "../../Redux/Slices/skillSlice";
 import {
   clearAllSoftwareAppErrors,
   deleteSoftwareApplication,
@@ -30,7 +33,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SpecialLoadingButton from "./SpecialLoadingButton";
-import { clearAllTimelineErrors } from "../../Redux/Slices/timelineSlice";
+import {
+  clearAllTimelineErrors,
+  getAllTimeline,
+} from "../../Redux/Slices/timelineSlice";
+import { getAllProjects } from "@/Redux/Slices/projectSlice";
 const Dashboard = () => {
   const navigateTo = useNavigate();
   const gotoMangeSkills = () => {
@@ -109,6 +116,14 @@ const Dashboard = () => {
     timelineMessage,
   ]);
 
+  // useEffect(() => {
+  //   dispatch(getAllSoftwareApplications());
+  //   dispatch(getAllTimeline());
+  //   dispatch(getAllProjects());
+  //   dispatch(getAllSkills());
+  // }, [dispatch]);
+
+  console.log(softwareApplications);
   return (
     <>
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -199,7 +214,7 @@ const Dashboard = () => {
                                 </TableCell>
                                 <TableCell className="text-right">
                                   <Link
-                                    to={element.projectLink}
+                                    to={element.projectlink}
                                     target="_blank"
                                   >
                                     <Button>Visit</Button>
