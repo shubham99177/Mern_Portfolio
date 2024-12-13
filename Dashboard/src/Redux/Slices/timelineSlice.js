@@ -16,7 +16,7 @@ const timelineSlice = createSlice({
       state.loading = true;
     },
     getAllTimelineSuccess(state, action) {
-      state.timeline = action.payload;
+      state.timeline = action.payload.timelines;
       state.error = null;
       state.loading = false;
     },
@@ -60,6 +60,7 @@ const timelineSlice = createSlice({
       state.timeline = state.timeline;
       state.message = null;
       state.loading = false;
+      console.log(state.timeline);
     },
     clearAllErrors(state, action) {
       state.error = null;
@@ -75,9 +76,8 @@ export const getAllTimeline = () => async (dispatch) => {
       "http://localhost:8000/api/v1/timeline/getall",
       { withCredentials: true }
     );
-    dispatch(
-      timelineSlice.actions.getAllTimelineSuccess(response.data.timelines)
-    );
+    console.log(response.data);
+    dispatch(timelineSlice.actions.getAllTimelineSuccess(response.data));
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(

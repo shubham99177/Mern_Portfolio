@@ -31,6 +31,10 @@ import AddSoftwareApplications from "./Sub-components/AddSoftwareApplications";
 import AddTimeline from "./Sub-components/AddTimeline";
 import Messages from "./Sub-components/Messages";
 import Account from "./Sub-components/Account";
+import { getAllSoftwareApplications } from "@/Redux/Slices/softwareApplicationSlice";
+import { getAllTimeline } from "@/Redux/Slices/timelineSlice";
+import { getAllProjects } from "@/Redux/Slices/projectSlice";
+import { getAllSkills } from "@/Redux/Slices/skillSlice";
 const HomePage = () => {
   const [active, setActive] = useState("Dashboard");
   const { isAuthenticated, error, user } = useSelector((state) => state.user);
@@ -50,6 +54,13 @@ const HomePage = () => {
       navigateTo("/login");
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    dispatch(getAllSoftwareApplications());
+    dispatch(getAllTimeline());
+    dispatch(getAllProjects());
+    dispatch(getAllSkills());
+  }, [dispatch]);
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 hidden w-14 flex-col border-r bg-background sm:flex z-50">
@@ -261,7 +272,7 @@ const HomePage = () => {
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground "
                 }`}
-                onClick={() => setActive("Add Uses")}
+                onClick={() => setActive("Add t")}
               >
                 <LayoutGrid className="h-5 w-5" />
                 Add Uses
@@ -283,7 +294,7 @@ const HomePage = () => {
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground "
                 }`}
-                onClick={() => setActive("Timeline")}
+                onClick={() => setActive("Add Timeline")}
               >
                 <History className="h-5 w-5" />
                 Timeline

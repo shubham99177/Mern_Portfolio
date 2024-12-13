@@ -22,6 +22,8 @@ export const addnewuseapplication = catchAsyncErrors(async (req, res, next) => {
       folder: "SVG",
     }
   );
+
+  console.log(req.files);
   if (!cloudinaryreponseforsvg || cloudinaryreponseforsvg.error) {
     console.error(
       "Cloudinary error",

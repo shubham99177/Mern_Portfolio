@@ -19,6 +19,7 @@ const softwareApplicationSlice = createSlice({
       state.softwareApplications = action.payload;
       state.error = null;
       state.loading = false;
+      console.log();
     },
     getAllsoftwareApplicationsFailed(state, action) {
       state.softwareApplications = state.softwareApplications;
@@ -74,12 +75,13 @@ export const getAllSoftwareApplications = () => async (dispatch) => {
   );
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/softwareapplication/getall",
+      "http://localhost:8000/api/v1/software/getall",
       { withCredentials: true }
     );
+    console.log(response.data.softwareuse);
     dispatch(
       softwareApplicationSlice.actions.getAllsoftwareApplicationsSuccess(
-        response.data.softwareApplications
+        response.data.softwareuse
       )
     );
     dispatch(softwareApplicationSlice.actions.clearAllErrors());
@@ -98,7 +100,7 @@ export const addNewSoftwareApplication = (data) => async (dispatch) => {
   );
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/softwareapplication/add",
+      "http://localhost:8000/api/v1/software/add",
       data,
       {
         withCredentials: true,
@@ -126,7 +128,7 @@ export const deleteSoftwareApplication = (id) => async (dispatch) => {
   );
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/softwareapplication/delete/${id}`,
+      `http://localhost:8000/api/v1/software/delete/${id}`,
       {
         withCredentials: true,
       }

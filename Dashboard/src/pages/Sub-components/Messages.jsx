@@ -49,6 +49,10 @@ const Messages = () => {
     }
   }, [dispatch, error, message, loading]);
 
+  useEffect(() => {
+    dispatch(getAllMessages());
+  }, [dispatch]);
+
   return (
     <>
       <div className="min-h-[100vh] sm:gap-4 sm:py-4 sm:pl-20">

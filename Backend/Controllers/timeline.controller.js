@@ -9,26 +9,28 @@ export const postTimeline = catchAsyncErrors(async (req, res, next) => {
   const timelines = await Timeline.create({
     title,
     description,
-    timelime: { from, to },
+    timeline: { from, to },
   });
 
   res.status(201).json({
     success: true,
-    Message: "Timeline created successfully",
+    message: "Timeline created successfully",
     timelines,
   });
 });
 
 export const deleteTimeline = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
+  console.log(id);
   const timeline = await Timeline.findByIdAndDelete(id);
+  console.log(timeline);
   if (!timeline) {
     return next(new ErrorHandler("Timeline not found", 404));
   }
 
   res.status(200).json({
     success: true,
-    Message: "Timeline deleted successfully",
+    message: "Timeline deleted successfully",
     timeline,
   });
 });
@@ -37,7 +39,7 @@ export const getallTimeline = catchAsyncErrors(async (req, res, next) => {
   const timelines = await Timeline.find();
   res.status(200).json({
     success: true,
-    Message: "Timeline fetched successfully",
+    message: "Timeline fetched successfully",
     timelines,
   });
 });

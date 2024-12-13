@@ -21,7 +21,6 @@ const AddTimeline = () => {
   const { loading, error, message } = useSelector((state) => state.timeline);
 
   const handleAddNewTimeline = (e) => {
-    e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -127,7 +126,7 @@ const AddTimeline = () => {
             {!loading ? (
               <Button
                 type="submit"
-                onClick={() => handleAddNewSkill()}
+                onClick={() => handleAddNewTimeline()}
                 className="w-full"
               >
                 Add Timeline
