@@ -134,8 +134,9 @@ export const updateprofile = catchAsyncErrors(async (req, res, next) => {
   let cloudinaryreponseforavtar = null;
 
   // Handle avatar upload
-  if (req.files?.avtar) {
-    const avtar = req.files.avtar;
+  if (req.files?.avatar) {
+    const avtar = req.files.avatar;
+    console.log(avtar)
     const user = await User.findById(req.user.id);
     const profileimage = user.avtar?.public_id;
     if (profileimage) {
