@@ -1,5 +1,5 @@
 import "./App.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/Theme-provider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ProjectView from "./pages/ProjectView";
