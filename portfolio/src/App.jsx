@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import ProjectView from "./pages/ProjectView";
 import Footer from "./pages/miniComponents/Footer";
 import { Toaster } from 'sonner'
-import ModeToggle from "./components/ModeToggle";
+import {ModeToggle} from "./components/ModeToggle";
 
 
 export default function App() {

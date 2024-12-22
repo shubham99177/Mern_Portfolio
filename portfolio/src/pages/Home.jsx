@@ -4,7 +4,7 @@ import Timeline from "./miniComponents/Timeline";
 import Skills from "./miniComponents/Skills";
 import MyApps from "./miniComponents/MyApps";
 import About from "./miniComponents/About";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Portfolio from "./miniComponents/Portfolio";
 import Contact from "./miniComponents/Contact";
 
