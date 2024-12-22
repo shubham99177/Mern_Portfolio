@@ -6,7 +6,7 @@ const Timeline = () => {
   useEffect(() => {
     const getMyTimeline = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/v1/timeline/getall",
+        `${import.meta.env.VITE_BACKEND_URL}/v1/timeline/getall`,
         { withCredentials: true }
       );
       setTimeline(data.timelines);

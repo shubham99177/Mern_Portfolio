@@ -15,7 +15,7 @@ const Contact = () => {
     setLoading(true);
     await axios
       .post(
-        "http://localhost:8000/api/v1/message/send",
+        `${import.meta.env.VITE_BACKEND_URL}/v1/message/send`,
         { senderName, subject, message },
         {
           withCredentials: true,

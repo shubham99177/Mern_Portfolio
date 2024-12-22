@@ -10,7 +10,7 @@ const Portfolio = () => {
   useEffect(() => {
     const getMyProjects = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/v1/project/getall",
+        `${import.meta.env.VITE_BACKEND_URL}/v1/project/getall`,
         { withCredentials: true }
       );
       setProjects(data.allprojects);

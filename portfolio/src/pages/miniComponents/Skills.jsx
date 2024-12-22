@@ -7,7 +7,7 @@ const Skills = () => {
   useEffect(() => {
     const getMySkills = async () => {
       const { data } = await axios.get(
-        "http://localhost:8000/api/v1/skills/getall",
+        `${import.meta.env.VITE_BACKEND_URL}/v1/skills/getall`,
         { withCredentials: true }
       );
       setSkills(data.skills);

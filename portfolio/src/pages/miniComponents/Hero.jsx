@@ -18,13 +18,14 @@ import {
     useEffect(() => {
       const getMyProfile = async () => {
         const { data } = await axios.get(
-          "http://localhost:8000/api/v1/user/portfolio",
+          `${import.meta.env.VITE_BACKEND_URL}/v1/user/portfolio`,
           { withCredentials: true }
         );
         setUser(data.user);
       };
       getMyProfile();
     }, []);
+    console.log(user);
     return (
       <div className="w-full">
         <div className="flex items-center gap-2 mb-2">
@@ -51,9 +52,9 @@ import {
           {/* <Link to={"https://www.youtube.com/@CodeWithZeeshu"} target="_blank">
             <Youtube className="text-red-500 w-7 h-7"/>
           </Link> */}
-          <Link to={user.instagramURL} target="_blank">
+          {/* <Link to={user.instagramURL} target="_blank">
             <Instagram className="text-pink-500 w-7 h-7" />
-          </Link>
+          </Link> */}
           {/* <Link to={user.facebookURL} target="_blank">
             <Facebook className="text-blue-800 w-7 h-7" />
           </Link> */}
