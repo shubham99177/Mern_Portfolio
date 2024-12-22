@@ -8,7 +8,7 @@ const MyApps = () => {
     const getMyApps = async () => {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_VITE_BACKEND_URL}/v1/software/getall`,
+          `${import.meta.env.VITE_BACKEND_URL}/v1/software/getall`,
           { withCredentials: true }
         );
         setApps(data.softwareuse);
@@ -18,7 +18,7 @@ const MyApps = () => {
     };
     getMyApps();
   }, []);
-  console.log(import.meta.env.VITE_VITE_BACKEND_URL)
+  console.log(import.meta.env.VITE_BACKEND_URL)
   return (
     <div className="w-full flex flex-col gap-8 sm:gap-12">
       <h1 className="text-tubeLight-effect text-[2rem] sm:text-[2.75rem] md:text-[3rem] lg:text-[3.8rem] tracking-[15px] dancing_text mx-auto w-fit">
